@@ -81,51 +81,6 @@ class EateriesTableViewController: UITableViewController {
     
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //First alert controller
-        let ac = UIAlertController(title: "Sushi-in", message: "You can buy it", preferredStyle: .actionSheet)
-        //First alert controller action cancel
-        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        //First alert controller action call
-        let call = UIAlertAction(title: "Call: +34 651 341 565", style: .default) {
-            (action: UIAlertAction) -> Void in
-            //Alert controller and action in Action call
-            let phoneURL = NSURL(string: ("tel://" + self.phoneNumber))
-            let ac = UIAlertController(title: ("Call " + self.phoneNumber + "?"), message: "Сall me if you want the best sushi in the world", preferredStyle: .alert)
-            ac.addAction(UIAlertAction(title: "Call", style: .default, handler: { (action) in
-                UIApplication.shared.open(phoneURL as! URL, options: [:], completionHandler: nil)
-            }))
-            let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-            ac.addAction(cancel)
-            
-            self.present(ac, animated: true, completion: nil)
-            
-        }
-        //Checking isVisible restaurant with controller and action
-        if indexPath.section == 0{
-        let isVisibleTitle = self.SushiIsVisited[indexPath.row] ? "I didn't take it" : "I took it"
-        let isVisited = UIAlertAction(title: isVisibleTitle, style: .default) { (action) in
-            let cell = tableView.cellForRow(at: indexPath)
-            self.SushiIsVisited[indexPath.row] = !self.SushiIsVisited[indexPath.row]
-            //Setting checkmark
-            cell?.accessoryType = self.SushiIsVisited[indexPath.row] ? .checkmark : .none
-            }
-            ac.addAction(isVisited)
-        }
-        if indexPath.section == 1{
-            let isVisibleTitle = self.PacksIsVisited[indexPath.row] ? "I was not here" : "I was here"
-            let isVisited = UIAlertAction(title: isVisibleTitle, style: .default) { (action) in
-                let cell = tableView.cellForRow(at: indexPath)
-                self.PacksIsVisited[indexPath.row] = !self.PacksIsVisited[indexPath.row]
-                //Setting checkmark
-                cell?.accessoryType = self.PacksIsVisited[indexPath.row] ? .checkmark : .none
-            }
-            ac.addAction(isVisited)
-
-        }
-        //AddAction to First alert Controller and present
-        ac.addAction(call)
-        ac.addAction(cancel)
-        present(ac, animated: true, completion: nil)
         //Hide selecting cell
         tableView.deselectRow(at: indexPath, animated: true)
     }
@@ -149,13 +104,63 @@ class EateriesTableViewController: UITableViewController {
                 }
             }
         }
-        let delete = UITableViewRowAction(style: .default, title: "Buy") { (action, indexPath) in
+        let buy = UITableViewRowAction(style: .default, title: "Buy") { (action, indexPath) in
             
             self.present(Alert.cartAlert(), animated: true, completion: nil)
             
         }
         share.backgroundColor = #colorLiteral(red: 0.3647058904, green: 0.06666667014, blue: 0.9686274529, alpha: 1)
-        return[delete, share]
+        
+        let more = UITableViewRowAction(style: .default, title: "More") { (action, indexPath) in
+            //First alert controller
+            let ac = UIAlertController(title: "Sushi-in", message: "You can buy it", preferredStyle: .actionSheet)
+            //First alert controller action cancel
+            let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            //First alert controller action call
+            let call = UIAlertAction(title: "Call: +34 651 341 565", style: .default) {
+                (action: UIAlertAction) -> Void in
+                //Alert controller and action in Action call
+                let phoneURL = NSURL(string: ("tel://" + self.phoneNumber))
+                let ac = UIAlertController(title: ("Call " + self.phoneNumber + "?"), message: "Сall me if you want the best sushi in the world", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "Call", style: .default, handler: { (action) in
+                    UIApplication.shared.open(phoneURL as! URL, options: [:], completionHandler: nil)
+                }))
+                let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+                ac.addAction(cancel)
+                
+                self.present(ac, animated: true, completion: nil)
+                
+            }
+            //Checking isVisible restaurant with controller and action
+            if indexPath.section == 0{
+                let isVisibleTitle = self.SushiIsVisited[indexPath.row] ? "I didn't take it" : "I took it"
+                let isVisited = UIAlertAction(title: isVisibleTitle, style: .default) { (action) in
+                    let cell = tableView.cellForRow(at: indexPath)
+                    self.SushiIsVisited[indexPath.row] = !self.SushiIsVisited[indexPath.row]
+                    //Setting checkmark
+                    cell?.accessoryType = self.SushiIsVisited[indexPath.row] ? .checkmark : .none
+                }
+                ac.addAction(isVisited)
+            }
+            if indexPath.section == 1{
+                let isVisibleTitle = self.PacksIsVisited[indexPath.row] ? "I was not here" : "I was here"
+                let isVisited = UIAlertAction(title: isVisibleTitle, style: .default) { (action) in
+                    let cell = tableView.cellForRow(at: indexPath)
+                    self.PacksIsVisited[indexPath.row] = !self.PacksIsVisited[indexPath.row]
+                    //Setting checkmark
+                    cell?.accessoryType = self.PacksIsVisited[indexPath.row] ? .checkmark : .none
+                }
+                ac.addAction(isVisited)
+                
+            }
+            //AddAction to First alert Controller and present
+            ac.addAction(call)
+            ac.addAction(cancel)
+            self.present(ac, animated: true, completion: nil)
+            
+        }
+        more.backgroundColor = #colorLiteral(red: 0.1960784346, green: 0.3411764801, blue: 0.1019607857, alpha: 1)
+        return[buy, share, more]
     }
     
     
