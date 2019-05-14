@@ -29,7 +29,8 @@ class EateriesTableViewController: UITableViewController {
     
     
     
-    var restaurantIsVisited = [Bool](repeatElement(false, count: 6))
+    var SushiIsVisited = [Bool](repeatElement(false, count: 3))
+    var PacksIsVisited = [Bool](repeatElement(false, count: 3))
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -64,7 +65,7 @@ class EateriesTableViewController: UITableViewController {
         cell.thumbnailImageView.clipsToBounds = true
         cell.nameLabel.text = SushiNames[indexPath.row]
         cell.typeLabel.text = SushiType[indexPath.row]
-        cell.accessoryType = self.restaurantIsVisited[indexPath.row] ? .checkmark : .none
+        cell.accessoryType = self.SushiIsVisited[indexPath.row] ? .checkmark : .none
         // Configure the cell...
             return cell
             
@@ -74,7 +75,7 @@ class EateriesTableViewController: UITableViewController {
         cell.thumbnailImageView.clipsToBounds = true
         cell.nameLabel.text = PacksNames[indexPath.row]
         cell.typeLabel.text = PacksType[indexPath.row]
-        cell.accessoryType = self.restaurantIsVisited[indexPath.row] ? .checkmark : .none
+        cell.accessoryType = self.PacksIsVisited[indexPath.row] ? .checkmark : .none
         return cell
     }
     
@@ -100,16 +101,29 @@ class EateriesTableViewController: UITableViewController {
             
         }
         //Checking isVisible restaurant with controller and action
-        let isVisibleTitle = self.restaurantIsVisited[indexPath.row] ? "I was not here" : "I was here"
+        if indexPath.section == 0{
+        let isVisibleTitle = self.SushiIsVisited[indexPath.row] ? "I didn't take it" : "I took it"
         let isVisited = UIAlertAction(title: isVisibleTitle, style: .default) { (action) in
             let cell = tableView.cellForRow(at: indexPath)
-            self.restaurantIsVisited[indexPath.row] = !self.restaurantIsVisited[indexPath.row]
+            self.SushiIsVisited[indexPath.row] = !self.SushiIsVisited[indexPath.row]
             //Setting checkmark
-            cell?.accessoryType = self.restaurantIsVisited[indexPath.row] ? .checkmark : .none
+            cell?.accessoryType = self.SushiIsVisited[indexPath.row] ? .checkmark : .none
+            }
+            ac.addAction(isVisited)
+        }
+        if indexPath.section == 1{
+            let isVisibleTitle = self.PacksIsVisited[indexPath.row] ? "I was not here" : "I was here"
+            let isVisited = UIAlertAction(title: isVisibleTitle, style: .default) { (action) in
+                let cell = tableView.cellForRow(at: indexPath)
+                self.PacksIsVisited[indexPath.row] = !self.PacksIsVisited[indexPath.row]
+                //Setting checkmark
+                cell?.accessoryType = self.PacksIsVisited[indexPath.row] ? .checkmark : .none
+            }
+            ac.addAction(isVisited)
+
         }
         //AddAction to First alert Controller and present
         ac.addAction(call)
-        ac.addAction(isVisited)
         ac.addAction(cancel)
         present(ac, animated: true, completion: nil)
         //Hide selecting cell
@@ -120,10 +134,19 @@ class EateriesTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let share = UITableViewRowAction(style: .default, title: "Share") { (action, indexPath) in
-            let defaultText = "Now I'm in" + self.SushiNames[indexPath.row]
+            if indexPath.section == 0{
+            let defaultText = "Now I'm eating " + self.SushiNames[indexPath.row]
             if let image = UIImage(named: self.SushiImages[indexPath.row]){
                 let activityController = UIActivityViewController(activityItems: [defaultText, image], applicationActivities: nil)
                 self.present(activityController, animated: true, completion: nil)
+                }
+            }
+            if indexPath.section == 1{
+                let defaultText = "Now I'm in " + self.PacksNames[indexPath.row]
+                if let image = UIImage(named: self.PacksImages[indexPath.row]){
+                    let activityController = UIActivityViewController(activityItems: [defaultText, image], applicationActivities: nil)
+                    self.present(activityController, animated: true, completion: nil)
+                }
             }
         }
         let delete = UITableViewRowAction(style: .default, title: "Buy") { (action, indexPath) in
