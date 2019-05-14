@@ -109,7 +109,7 @@ class EateriesTableViewController: UITableViewController {
             self.present(Alert.cartAlert(), animated: true, completion: nil)
             
         }
-        share.backgroundColor = #colorLiteral(red: 0.3647058904, green: 0.06666667014, blue: 0.9686274529, alpha: 1)
+
         
         let more = UITableViewRowAction(style: .default, title: "More") { (action, indexPath) in
             //First alert controller
@@ -159,6 +159,8 @@ class EateriesTableViewController: UITableViewController {
             self.present(ac, animated: true, completion: nil)
             
         }
+        
+        share.backgroundColor = #colorLiteral(red: 0.3647058904, green: 0.06666667014, blue: 0.9686274529, alpha: 1)
         more.backgroundColor = #colorLiteral(red: 0.1960784346, green: 0.3411764801, blue: 0.1019607857, alpha: 1)
         return[buy, share, more]
     }
