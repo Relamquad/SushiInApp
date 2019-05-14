@@ -11,16 +11,24 @@ import UIKit
 class EateriesTableViewController: UITableViewController {
   
     let phoneNumber = "+34651341565"
-    var restaurantNames = ["BARCELONA BOAT SET","GAUDI DRAGON SET","SENBONSAKURA SET","Visit an amazing viewpoint of Tibidabo","Guided Tour inside of the Gothic Quarter","Your couple and you in the middle of the sea"]
-    var restaurantImages = ["1","2","3","4","5","6"]
-    var restaurantType = ["Sushi set","Sushi set","Sushi set","Trip+Sushi pack","Trip+Sushi pack","Trip+Sushi pack"]
-    var restaurantDescription = ["40 pieces (recomended for 4 persons)\nAre you group of people and you don't decide what you want to try out?  We have a solution for you! \nOur incredible and unbeliveble boat of sushi that offers you 40 different sushi pieces.\nAre you ready for that?",
+    var SushiNames = ["BARCELONA BOAT SET","GAUDI DRAGON SET","SENBONSAKURA SET"]
+    var SushiImages = ["1","2","3"]
+    var SushiType = ["Sushi set","Sushi set","Sushi set"]
+    var SushiDescription = ["40 pieces (recomended for 4 persons)\nAre you group of people and you don't decide what you want to try out?  We have a solution for you! \nOur incredible and unbeliveble boat of sushi that offers you 40 different sushi pieces.\nAre you ready for that?",
                                  "30 pieces \nMagnificent Sushi dish in form of Gaudi's mythical dragon.\nHave you seen something similar before? We don't think so!",
-                                 "20 pieces\nBasic set of sushi with 5 diffent packs of traditional sushi:\n- 4 pieces of Makis with salmon\n- 4 pieces of Makis with aguacate\n- 4 pieces of Makis with crab\n- 4 pieces of Futomaki\n- 4 pieces of Nigiris with salmon",
-                                 "Can you imagine a better plan than visiting the legendary viewpoint of Tibidabo and have a romantic sushi-dinner with you couple? ",
-                                 "An incredible afternoon with a private guide who will show you the secrets of the Gothic Quarter with an incredible Sushi dinner",
-                                 "Magnificent dinner with your couple in the meadle of the sea. Its your opportunity to impress him/her."]
-    var restaurantPrice = ["59.95€","49.95€","34.95€","80€","70€","150€"]
+                                 "20 pieces\nBasic set of sushi with 5 diffent packs of traditional sushi:\n- 4 pieces of Makis with salmon\n- 4 pieces of Makis with aguacate\n- 4 pieces of Makis with crab\n- 4 pieces of Futomaki\n- 4 pieces of Nigiris with salmon"]
+    var SushiPrice = ["59.95€","49.95€","34.95€"]
+    
+    var PacksNames = ["Visit an amazing viewpoint of Tibidabo","Guided Tour inside of the Gothic Quarter","Your couple and you in the middle of the sea"]
+    var PacksImages = ["4","5","6"]
+    var PacksType = ["Trip+Sushi pack","Trip+Sushi pack","Trip+Sushi pack"]
+    var PacksDescription = ["Can you imagine a better plan than visiting the legendary viewpoint of Tibidabo and have a romantic sushi-dinner with you couple? ",
+                            "An incredible afternoon with a private guide who will show you the secrets of the Gothic Quarter with an incredible Sushi dinner",
+                            "Magnificent dinner with your couple in the meadle of the sea. Its your opportunity to impress him/her."]
+    var PacksPrice = ["80€","70€","150€"]
+    
+    
+    
     var restaurantIsVisited = [Bool](repeatElement(false, count: 6))
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,25 +39,42 @@ class EateriesTableViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 1
+        return 2
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return restaurantNames.count
+        if section == 0{
+            return SushiNames.count
+        }
+        return PacksNames.count
     }
-
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 0{
+            return "SUSHI SETS"
+        }
+        return "Trip+Sushi pack"
+    }
     // MARK: - Table view cellForRowAt
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "IdCell", for: indexPath) as! EateriesTableViewCell
-        cell.thumbnailImageView.image = UIImage(named: restaurantImages[indexPath.row])
+        if indexPath.section == 0{
+        cell.thumbnailImageView.image = UIImage(named: SushiImages[indexPath.row])
         cell.thumbnailImageView.layer.cornerRadius = 32.5
         cell.thumbnailImageView.clipsToBounds = true
-        cell.nameLabel.text = restaurantNames[indexPath.row]
-        cell.typeLabel.text = restaurantType[indexPath.row]
+        cell.nameLabel.text = SushiNames[indexPath.row]
+        cell.typeLabel.text = SushiType[indexPath.row]
         cell.accessoryType = self.restaurantIsVisited[indexPath.row] ? .checkmark : .none
         // Configure the cell...
-
+            return cell
+            
+        }
+        cell.thumbnailImageView.image = UIImage(named: PacksImages[indexPath.row])
+        cell.thumbnailImageView.layer.cornerRadius = 32.5
+        cell.thumbnailImageView.clipsToBounds = true
+        cell.nameLabel.text = PacksNames[indexPath.row]
+        cell.typeLabel.text = PacksType[indexPath.row]
+        cell.accessoryType = self.restaurantIsVisited[indexPath.row] ? .checkmark : .none
         return cell
     }
     
@@ -95,8 +120,8 @@ class EateriesTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let share = UITableViewRowAction(style: .default, title: "Share") { (action, indexPath) in
-            let defaultText = "Now I'm in" + self.restaurantNames[indexPath.row]
-            if let image = UIImage(named: self.restaurantImages[indexPath.row]){
+            let defaultText = "Now I'm in" + self.SushiNames[indexPath.row]
+            if let image = UIImage(named: self.SushiImages[indexPath.row]){
                 let activityController = UIActivityViewController(activityItems: [defaultText, image], applicationActivities: nil)
                 self.present(activityController, animated: true, completion: nil)
             }
@@ -115,10 +140,18 @@ class EateriesTableViewController: UITableViewController {
         if segue.identifier == "detailSegue" {
             if let indexPath = tableView.indexPathForSelectedRow{
                 let dvc = segue.destination as! DetailViewController
-                dvc.imageName = self.restaurantImages[indexPath.row]
-                dvc.titleName = self.restaurantNames[indexPath.row]
-                dvc.titleDescription = self.restaurantDescription[indexPath.row]
-                dvc.titlePrice = self.restaurantPrice[indexPath.row]
+                if indexPath.section == 0 {
+                dvc.imageName = self.SushiImages[indexPath.row]
+                dvc.titleName = self.SushiNames[indexPath.row]
+                dvc.titleDescription = self.SushiDescription[indexPath.row]
+                dvc.titlePrice = self.SushiPrice[indexPath.row]
+                }
+                if indexPath.section == 1 {
+                dvc.imageName = self.PacksImages[indexPath.row]
+                dvc.titleName = self.PacksNames[indexPath.row]
+                dvc.titleDescription = self.PacksDescription[indexPath.row]
+                dvc.titlePrice = self.PacksPrice[indexPath.row]
+                }
             }
             
         }
