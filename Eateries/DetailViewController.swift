@@ -16,6 +16,7 @@ class DetailViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var addToCartButton: UIButton!
+    @IBOutlet weak var mapButton: UIButton!
     
     var imageName = ""
     var titleName = ""
@@ -36,9 +37,12 @@ class DetailViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         titleLabel.text = titleName
         descriptionLabel.text = titleDescription
         priceLabel.text = "Price: \(titlePrice)"
-        
-        addToCartButton.layer.cornerRadius = 5
-        addToCartButton.clipsToBounds = true
+        let buttons = [addToCartButton, mapButton]
+        for button in buttons {
+        guard let button = button else {break}
+        button.layer.cornerRadius = 5
+        button.clipsToBounds = true
+        }
         // Do any additional setup after loading the view.
     }
     

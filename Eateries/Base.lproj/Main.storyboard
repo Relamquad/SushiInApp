@@ -140,6 +140,16 @@
                                     <action selector="addToCartPress:" destination="dMD-0p-Skm" eventType="touchUpInside" id="xxf-EV-P2Z"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="81F-f0-xdA">
+                                <rect key="frame" x="129.5" y="448" width="141" height="30"/>
+                                <color key="backgroundColor" red="0.62959754469999996" green="0.2715582252" blue="0.28782010079999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="SHOW ON THE MAP">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <segue destination="sr6-VR-JVs" kind="show" id="bmS-mO-4rO"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -147,10 +157,12 @@
                             <constraint firstItem="1sV-9I-Sef" firstAttribute="trailing" secondItem="vZY-BN-OfL" secondAttribute="trailing" id="1tR-wd-q7B"/>
                             <constraint firstItem="RWV-1H-7Va" firstAttribute="top" secondItem="hIy-Lr-DFt" secondAttribute="bottom" constant="12.5" id="3Cv-31-3Ma"/>
                             <constraint firstItem="8Kw-Ta-YGb" firstAttribute="leading" secondItem="RWV-1H-7Va" secondAttribute="trailing" constant="14" id="3or-oD-ptF"/>
+                            <constraint firstItem="81F-f0-xdA" firstAttribute="trailing" secondItem="8Kw-Ta-YGb" secondAttribute="trailing" id="6el-B2-Ojt"/>
                             <constraint firstItem="hIy-Lr-DFt" firstAttribute="top" secondItem="sdg-7c-Z4c" secondAttribute="bottom" constant="21" id="70y-0k-DZi"/>
                             <constraint firstItem="sdg-7c-Z4c" firstAttribute="top" secondItem="vZY-BN-OfL" secondAttribute="bottom" constant="25" id="DRE-KS-9cJ"/>
                             <constraint firstItem="8KX-G0-UD6" firstAttribute="top" secondItem="hIy-Lr-DFt" secondAttribute="bottom" constant="17.5" id="DUn-0e-suL"/>
                             <constraint firstItem="sdg-7c-Z4c" firstAttribute="leading" secondItem="1sV-9I-Sef" secondAttribute="leading" constant="16" id="GwT-at-e0x"/>
+                            <constraint firstItem="81F-f0-xdA" firstAttribute="top" secondItem="8Kw-Ta-YGb" secondAttribute="bottom" constant="19" id="RcB-fz-cZl"/>
                             <constraint firstItem="hIy-Lr-DFt" firstAttribute="leading" secondItem="1sV-9I-Sef" secondAttribute="leading" constant="16" id="Rvt-6o-YG2"/>
                             <constraint firstItem="RWV-1H-7Va" firstAttribute="leading" secondItem="8KX-G0-UD6" secondAttribute="trailing" constant="19" id="Ry4-zO-6Ej"/>
                             <constraint firstItem="8KX-G0-UD6" firstAttribute="leading" secondItem="1sV-9I-Sef" secondAttribute="leading" constant="71" id="VWW-rA-Ooh"/>
@@ -165,6 +177,7 @@
                         <outlet property="addToCartButton" destination="8Kw-Ta-YGb" id="dnk-ew-TmQ"/>
                         <outlet property="descriptionLabel" destination="hIy-Lr-DFt" id="UsG-0q-6Cr"/>
                         <outlet property="detailImage" destination="vZY-BN-OfL" id="2Ym-s8-8V3"/>
+                        <outlet property="mapButton" destination="81F-f0-xdA" id="osa-mO-jox"/>
                         <outlet property="priceLabel" destination="8KX-G0-UD6" id="B5t-LX-rZI"/>
                         <outlet property="textField" destination="RWV-1H-7Va" id="w2w-zf-Bqr"/>
                         <outlet property="titleLabel" destination="sdg-7c-Z4c" id="w2k-rh-UT1"/>
@@ -172,7 +185,36 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xB5-S8-yjl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1112.8" y="-37.331334332833585"/>
+            <point key="canvasLocation" x="1193" y="-37"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="QHB-b3-nqq">
+            <objects>
+                <viewController id="sr6-VR-JVs" customClass="ViewController" customModule="Eateries" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Ndu-OR-v0I">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="08H-u1-z3D">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                            </mapView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="08H-u1-z3D" firstAttribute="trailing" secondItem="0PN-Qm-5Ac" secondAttribute="trailing" id="1jK-j6-9QK"/>
+                            <constraint firstItem="08H-u1-z3D" firstAttribute="leading" secondItem="0PN-Qm-5Ac" secondAttribute="leading" id="7nQ-PE-PZg"/>
+                            <constraint firstItem="08H-u1-z3D" firstAttribute="bottom" secondItem="0PN-Qm-5Ac" secondAttribute="bottom" id="JCT-5N-r3o"/>
+                            <constraint firstItem="08H-u1-z3D" firstAttribute="top" secondItem="0PN-Qm-5Ac" secondAttribute="top" id="p2m-sc-gcI"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="0PN-Qm-5Ac"/>
+                    </view>
+                    <connections>
+                        <outlet property="myMap" destination="08H-u1-z3D" id="Jw0-KY-Uvq"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YLr-FZ-h22" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2029.5999999999999" y="-37.331334332833585"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="sCW-sJ-sPc">
