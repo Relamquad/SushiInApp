@@ -16,6 +16,7 @@
 		6068629B22478BDE00E59AF6 /* EateriesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6068629A22478BDE00E59AF6 /* EateriesTableViewCell.swift */; };
 		60950D7B22897CAF00B7E9A3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60950D7A22897CAF00B7E9A3 /* ViewController.swift */; };
 		60950D7D228AB26000B7E9A3 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60950D7C228AB26000B7E9A3 /* DetailViewController.swift */; };
+		60950D7F228AEB9D00B7E9A3 /* AlertsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60950D7E228AEB9D00B7E9A3 /* AlertsManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		6068629A22478BDE00E59AF6 /* EateriesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EateriesTableViewCell.swift; sourceTree = "<group>"; };
 		60950D7A22897CAF00B7E9A3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		60950D7C228AB26000B7E9A3 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		60950D7E228AEB9D00B7E9A3 /* AlertsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertsManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +74,7 @@
 				6068629A22478BDE00E59AF6 /* EateriesTableViewCell.swift */,
 				60950D7A22897CAF00B7E9A3 /* ViewController.swift */,
 				60950D7C228AB26000B7E9A3 /* DetailViewController.swift */,
+				60950D7E228AEB9D00B7E9A3 /* AlertsManager.swift */,
 			);
 			path = Eateries;
 			sourceTree = "<group>";
@@ -151,6 +154,7 @@
 				60307C1422391A0D005CB5E2 /* Eateries.xcdatamodeld in Sources */,
 				60307C2122391AA1005CB5E2 /* EateriesTableViewController.swift in Sources */,
 				60950D7D228AB26000B7E9A3 /* DetailViewController.swift in Sources */,
+				60950D7F228AEB9D00B7E9A3 /* AlertsManager.swift in Sources */,
 				60307C0C22391A0D005CB5E2 /* AppDelegate.swift in Sources */,
 				6068629B22478BDE00E59AF6 /* EateriesTableViewCell.swift in Sources */,
 			);

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DetailViewController: UIViewController {
+class DetailViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource{
 
     @IBOutlet weak var detailImage: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
@@ -21,10 +21,17 @@ class DetailViewController: UIViewController {
     var titleName = ""
     var titleDescription = ""
     var titlePrice = ""
+    var counts = ["1","2","3","4","5","6","7","8","9","10+"]
+    
+    var picker = UIPickerView()
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        picker.delegate = self
+        picker.dataSource = self
+        textField.inputView = picker
+        
         detailImage.image = UIImage(named: imageName)
         titleLabel.text = titleName
         descriptionLabel.text = titleDescription
@@ -36,17 +43,25 @@ class DetailViewController: UIViewController {
     }
     
     @IBAction func addToCartPress(_ sender: Any) {
+        self.present(Alert.cartAlert(), animated: true, completion: nil)
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
     }
-    */
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return counts.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return counts[row]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        textField.text = counts[row]
+        self.view.endEditing(false)
+    }
     func makePhoneCall(phoneNumber: String) {
         
         if let phoneURL = NSURL(string: ("tel://" + phoneNumber)) {

@@ -25,14 +25,9 @@ class EateriesTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+ 
     }
     
-    // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
@@ -96,18 +91,7 @@ class EateriesTableViewController: UITableViewController {
         tableView.deselectRow(at: indexPath, animated: true)
     }
 
-//    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-//        if editingStyle == .delete {
-//            self.restaurantNames.remove(at: indexPath.row)
-//            self.restaurantImages.remove(at: indexPath.row)
-//            self.restaurantIsVisited.remove(at: indexPath.row)
-//
-//
-//        }
-//       // self.tableView.reloadData()
-//        tableView.deleteRows(at: [indexPath], with: .fade)
-//    }
-    
+
     
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let share = UITableViewRowAction(style: .default, title: "Share") { (action, indexPath) in
@@ -118,11 +102,9 @@ class EateriesTableViewController: UITableViewController {
             }
         }
         let delete = UITableViewRowAction(style: .default, title: "Buy") { (action, indexPath) in
-            let ac = UIAlertController(title: "Cart", message: "Sorry😢\n Your cart will appear soon, but for now you can make a call.", preferredStyle: .alert)
-            //First alert controller action cancel
-            let cancel = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
-            ac.addAction(cancel)
-            self.present(ac, animated: true, completion: nil)
+            
+            self.present(Alert.cartAlert(), animated: true, completion: nil)
+            
         }
         share.backgroundColor = #colorLiteral(red: 0.3647058904, green: 0.06666667014, blue: 0.9686274529, alpha: 1)
         return[delete, share]
