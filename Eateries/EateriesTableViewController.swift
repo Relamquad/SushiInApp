@@ -14,6 +14,13 @@ class EateriesTableViewController: UITableViewController {
     var restaurantNames = ["BARCELONA BOAT SET","GAUDI DRAGON SET","SENBONSAKURA SET","Visit an amazing viewpoint of Tibidabo","Guided Tour inside of the Gothic Quarter","Your couple and you in the middle of the sea"]
     var restaurantImages = ["1","2","3","4","5","6"]
     var restaurantType = ["Sushi set","Sushi set","Sushi set","Trip+Sushi pack","Trip+Sushi pack","Trip+Sushi pack"]
+    var restaurantDescription = ["40 pieces (recomended for 4 persons)\nAre you group of people and you don't decide what you want to try out?  We have a solution for you! \nOur incredible and unbeliveble boat of sushi that offers you 40 different sushi pieces.\nAre you ready for that?",
+                                 "30 pieces \nMagnificent Sushi dish in form of Gaudi's mythical dragon.\nHave you seen something similar before? We don't think so!",
+                                 "20 pieces\nBasic set of sushi with 5 diffent packs of traditional sushi:\n- 4 pieces of Makis with salmon\n- 4 pieces of Makis with aguacate\n- 4 pieces of Makis with crab\n- 4 pieces of Futomaki\n- 4 pieces of Nigiris with salmon",
+                                 "Can you imagine a better plan than visiting the legendary viewpoint of Tibidabo and have a romantic sushi-dinner with you couple? ",
+                                 "An incredible afternoon with a private guide who will show you the secrets of the Gothic Quarter with an incredible Sushi dinner",
+                                 "Magnificent dinner with your couple in the meadle of the sea. Its your opportunity to impress him/her."]
+    var restaurantPrice = ["59.95€","49.95€","34.95€","80€","70€","150€"]
     var restaurantIsVisited = [Bool](repeatElement(false, count: 6))
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -121,63 +128,18 @@ class EateriesTableViewController: UITableViewController {
         return[delete, share]
     }
     
-    func makePhoneCall(phoneNumber: String) {
-        
-        if let phoneURL = NSURL(string: ("tel://" + phoneNumber)) {
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "detailSegue" {
+            if let indexPath = tableView.indexPathForSelectedRow{
+                let dvc = segue.destination as! DetailViewController
+                dvc.imageName = self.restaurantImages[indexPath.row]
+                dvc.titleName = self.restaurantNames[indexPath.row]
+                dvc.titleDescription = self.restaurantDescription[indexPath.row]
+                dvc.titlePrice = self.restaurantPrice[indexPath.row]
+            }
             
-            let alert = UIAlertController(title: ("Call " + phoneNumber + "?"), message: nil, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Call", style: .default, handler: { (action) in
-                UIApplication.shared.open(phoneURL as URL, options: [:], completionHandler: nil)
-            }))
-            
-            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-            self.present(alert, animated: true, completion: nil)
         }
     }
-    
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
